@@ -12,7 +12,4 @@ COPY . .
 RUN npm run build
 
 EXPOSE 3000
-RUN cp -r .next/static .next/standalone/.next/static \
-  && if [ -d public ]; then cp -r public .next/standalone/public; fi
-
-CMD ["node", ".next/standalone/server.js"]
+CMD ["npm", "run", "start"]
