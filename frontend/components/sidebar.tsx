@@ -21,7 +21,7 @@ export function Sidebar() {
       <div className="flex items-center justify-between">
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Кредитный риск</p>
-          <h1 className="text-xl font-semibold">MVP Альфа-стиль</h1>
+          <h1 className="text-xl font-semibold">MVP консоль</h1>
         </div>
         <ThemeToggle />
       </div>
