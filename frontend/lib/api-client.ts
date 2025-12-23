@@ -25,8 +25,11 @@ export function fetchDashboard() {
   return request('/api/v1/dashboard');
 }
 
-export function createJob(payload: Record<string, unknown>) {
-  return request('/api/v1/jobs', { method: 'POST', body: JSON.stringify(payload) });
+export function createJob(payload: Record<string, unknown>): Promise<{ id: number }> {
+  return request<{ id: number }>('/api/v1/jobs', {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  });
 }
 
 export function fetchJobs(): Promise<any[]> {
