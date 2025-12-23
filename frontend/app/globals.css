@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 228 22% 12%;
+  --card: 0 0% 100%;
+  --primary: 0 82% 54%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 210 30% 96%;
+  --muted-foreground: 225 12% 40%;
+  --border: 220 20% 92%;
+  --accent: 0 85% 96%;
+}
+
+.dark {
+  --background: 220 18% 10%;
+  --foreground: 210 40% 98%;
+  --card: 224 20% 16%;
+  --primary: 0 82% 54%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 225 16% 22%;
+  --muted-foreground: 220 12% 70%;
+  --border: 225 18% 26%;
+  --accent: 0 32% 24%;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-family: "Manrope", "Inter", "Arial", sans-serif;
+}
+
+.alpha-gradient {
+  background: linear-gradient(135deg, #ffebeb 0%, #ffffff 60%);
+}
