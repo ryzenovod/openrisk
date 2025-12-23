@@ -6,8 +6,9 @@ import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const isDark = theme === 'dark';
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const currentTheme = resolvedTheme ?? theme;
+  const isDark = currentTheme === 'dark';
   return (
     <Button
       variant="outline"

@@ -20,6 +20,18 @@ const initialForm = {
   interest_rate: 11.5
 };
 
+const fieldLabels: Record<string, string> = {
+  age: 'Возраст',
+  income: 'Доход',
+  employment_years: 'Стаж (лет)',
+  debt_to_income: 'Долг/доход',
+  credit_history_months: 'Кредитная история (мес.)',
+  delinquencies: 'Просрочки',
+  loan_amount: 'Сумма кредита',
+  loan_term_months: 'Срок (мес.)',
+  interest_rate: 'Ставка (%)'
+};
+
 export default function ScorePage() {
   const [form, setForm] = useState(initialForm);
   const [result, setResult] = useState<any>(null);
@@ -57,7 +69,7 @@ export default function ScorePage() {
           <CardContent className="grid gap-3">
             {Object.entries(form).map(([key, value]) => (
               <label key={key} className="grid gap-1 text-sm">
-                {key}
+                {fieldLabels[key] ?? key}
                 <input
                   className="rounded-2xl border border-border bg-background px-4 py-2"
                   value={value}
@@ -67,7 +79,9 @@ export default function ScorePage() {
                 />
               </label>
             ))}
-            <Button onClick={handleSubmit}>Запустить скоринг</Button>
+            <Button className="h-12 px-6 text-base" onClick={handleSubmit}>
+              Запустить скоринг
+            </Button>
           </CardContent>
         </Card>
         <Card>

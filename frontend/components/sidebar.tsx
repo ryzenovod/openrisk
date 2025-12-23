@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Activity, ClipboardCheck, Database, LayoutDashboard, Settings } from 'lucide-react';
@@ -16,12 +17,26 @@ const navItems = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const [apiKey, setApiKey] = useState('');
+
+  useEffect(() => {
+    const stored = localStorage.getItem('apiKey');
+    if (stored) {
+      setApiKey(stored);
+    }
+  }, []);
+
+  const handleApiKeyChange = (value: string) => {
+    setApiKey(value);
+    localStorage.setItem('apiKey', value);
+  };
+
   return (
     <aside className="flex w-72 flex-col border-r border-border bg-card p-6">
       <div className="flex items-center justify-between">
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Кредитный риск</p>
-          <h1 className="text-xl font-semibold">MVP консоль</h1>
+          <h1 className="text-xl font-semibold">Платформа решений</h1>
         </div>
         <ThemeToggle />
       </div>
@@ -47,12 +62,18 @@ export function Sidebar() {
         })}
       </nav>
       <div className="rounded-2xl bg-muted p-4 text-xs text-muted-foreground">
-        <p className="font-semibold text-foreground">Realtime синхронизация</p>
-        <p>События SSE + asyncio-примитивы</p>
+        <p className="font-semibold text-foreground">Доступ к API</p>
+        <p>Введите ключ, чтобы формы работали в интерфейсе.</p>
+        <input
+          className="mt-3 w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground"
+          placeholder="API ключ"
+          value={apiKey}
+          onChange={(event) => handleApiKeyChange(event.target.value)}
+        />
       </div>
       <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
         <Settings className="h-3 w-3" />
-        API‑ключ обязателен
+        Ключ хранится локально в браузере
       </div>
     </aside>
   );

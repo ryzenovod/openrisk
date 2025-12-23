@@ -1,12 +1,19 @@
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? 'http://localhost:8000';
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY ?? 'local-dev-key';
 
+function resolveApiKey() {
+  if (typeof window === 'undefined') {
+    return API_KEY;
+  }
+  return localStorage.getItem('apiKey') || API_KEY;
+}
+
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(`${API_BASE}${path}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      'X-API-Key': API_KEY,
+      'X-API-Key': resolveApiKey(),
       ...(options.headers || {})
     },
     cache: 'no-store'
@@ -42,6 +49,6 @@ export function fetchJob(jobId: number): Promise<any> {
 
 export function createJobEventSource(jobId: number) {
   const url = new URL(`${API_BASE}/api/v1/jobs/${jobId}/events`);
-  url.searchParams.set('api_key', API_KEY);
+  url.searchParams.set('api_key', resolveApiKey());
   return new EventSource(url.toString());
 }

@@ -95,7 +95,9 @@ export default function OptimizePage() {
               ))}
             </TableBody>
           </Table>
-          <Button onClick={handleOptimize}>Запустить оптимизацию</Button>
+          <Button className="h-12 px-6 text-base" onClick={handleOptimize}>
+            Запустить оптимизацию
+          </Button>
         </CardContent>
       </Card>
     </div>
