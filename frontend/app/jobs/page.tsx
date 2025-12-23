@@ -12,7 +12,9 @@ export default function JobsPage() {
   const [jobs, setJobs] = useState<any[]>([]);
 
   useEffect(() => {
-    fetchJobs().then(setJobs).catch(() => setJobs([]));
+    fetchJobs()
+      .then((data) => setJobs(data))
+      .catch(() => setJobs([]));
   }, []);
 
   return (
