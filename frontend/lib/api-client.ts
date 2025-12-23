@@ -29,11 +29,11 @@ export function createJob(payload: Record<string, unknown>) {
   return request('/api/v1/jobs', { method: 'POST', body: JSON.stringify(payload) });
 }
 
-export function fetchJobs() {
-  return request('/api/v1/jobs');
+export function fetchJobs(): Promise<any[]> {
+  return request<any[]>('/api/v1/jobs');
 }
 
-export function fetchJob(jobId: number) {
+export function fetchJob(jobId: number): Promise<any> {
   return request(`/api/v1/jobs/${jobId}`);
 }
 
