@@ -23,7 +23,11 @@ export function Sidebar() {
     const stored = localStorage.getItem('apiKey');
     if (stored) {
       setApiKey(stored);
+      return;
     }
+    const fallback = 'local-dev-key';
+    setApiKey(fallback);
+    localStorage.setItem('apiKey', fallback);
   }, []);
 
   const handleApiKeyChange = (value: string) => {
@@ -70,6 +74,7 @@ export function Sidebar() {
           value={apiKey}
           onChange={(event) => handleApiKeyChange(event.target.value)}
         />
+        <p className="mt-2 text-[11px] text-muted-foreground">По умолчанию ключ уже сохранён.</p>
       </div>
       <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
         <Settings className="h-3 w-3" />

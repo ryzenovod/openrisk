@@ -30,6 +30,12 @@ docker compose up --build
 - Portfolio optimize: запуск job оптимизации портфеля.
 - Jobs: список задач и detail-страница с живым логом через SSE.
 
+### Где взять API-ключ
+
+- По умолчанию ключ: `local-dev-key` (см. `API_KEY` в `docker-compose.yml`).
+- Можно заменить ключ, задав `API_KEY` в окружении backend и `NEXT_PUBLIC_API_KEY` для frontend.
+- В интерфейсе ключ вводится в сайдбаре и сохраняется локально в браузере.
+
 ## API
 
 - Backend: `http://localhost:8000`
