@@ -40,15 +40,18 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">Credit Risk Dashboard</h2>
-        <p className="text-sm text-muted">Realtime metrics and portfolio insights.</p>
+      <div className="alpha-gradient rounded-3xl border border-border p-6">
+        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Кредитный риск</p>
+        <h2 className="mt-3 text-3xl font-semibold">Дашборд портфеля</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Реальные метрики и мониторинг качества выдачи.
+        </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
         <Card>
           <CardHeader>
-            <CardTitle>Total applications</CardTitle>
+            <CardTitle>Всего заявок</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-semibold">{metrics.total_applications}</p>
@@ -56,7 +59,7 @@ export default function DashboardPage() {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Approved rate</CardTitle>
+            <CardTitle>Доля одобрений</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-semibold">{(metrics.approved_rate * 100).toFixed(1)}%</p>
@@ -64,7 +67,7 @@ export default function DashboardPage() {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Average PD</CardTitle>
+            <CardTitle>Средняя PD</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-semibold">{(metrics.average_pd * 100).toFixed(1)}%</p>
@@ -72,10 +75,10 @@ export default function DashboardPage() {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Portfolio EL</CardTitle>
+            <CardTitle>Ожидаемые потери</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-semibold">${metrics.portfolio_el.toFixed(0)}</p>
+            <p className="text-2xl font-semibold">{metrics.portfolio_el.toFixed(0)} ₽</p>
           </CardContent>
         </Card>
       </div>
@@ -83,8 +86,8 @@ export default function DashboardPage() {
       <div className="grid gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>PD distribution</CardTitle>
-            <Badge>recharts</Badge>
+            <CardTitle>Распределение PD</CardTitle>
+            <Badge>аналитика</Badge>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -99,8 +102,8 @@ export default function DashboardPage() {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>EL over time</CardTitle>
-            <Badge variant="success">stable</Badge>
+            <CardTitle>EL во времени</CardTitle>
+            <Badge variant="success">стабильно</Badge>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">

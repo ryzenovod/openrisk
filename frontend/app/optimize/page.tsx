@@ -45,28 +45,31 @@ export default function OptimizePage() {
         applications,
         budget
       });
-      setMessage(`Optimization job created: #${job.id}`);
+      setMessage(`Задача оптимизации создана: #${job.id}`);
     } catch (error) {
-      setMessage('Failed to start optimization job.');
+      setMessage('Не удалось запустить оптимизацию.');
     }
   };
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">Portfolio optimize</h2>
-        <p className="text-sm text-muted">Запуск job для оптимального портфеля по бюджету.</p>
+      <div className="alpha-gradient rounded-3xl border border-border p-6">
+        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Оптимизация</p>
+        <h2 className="mt-3 text-3xl font-semibold">Портфель и бюджет</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Запустите job для отбора заявок при ограничении бюджета.
+        </p>
       </div>
       {message && <Toast message={message} />}
       <Card>
-        <CardHeader>
-          <CardTitle>Input applications</CardTitle>
-        </CardHeader>
+          <CardHeader>
+            <CardTitle>Входные заявки</CardTitle>
+          </CardHeader>
         <CardContent className="space-y-4">
           <label className="text-sm">
-            Budget
+            Бюджет
             <input
-              className="mt-1 w-full rounded-md border bg-background px-3 py-2"
+              className="mt-1 w-full rounded-2xl border border-border bg-background px-4 py-2"
               type="number"
               value={budget}
               onChange={(event) => setBudget(Number(event.target.value))}
@@ -75,10 +78,10 @@ export default function OptimizePage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Age</TableHead>
-                <TableHead>Income</TableHead>
+                <TableHead>Возраст</TableHead>
+                <TableHead>Доход</TableHead>
                 <TableHead>DTI</TableHead>
-                <TableHead>Loan</TableHead>
+                <TableHead>Сумма</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -92,7 +95,7 @@ export default function OptimizePage() {
               ))}
             </TableBody>
           </Table>
-          <Button onClick={handleOptimize}>Run optimization job</Button>
+          <Button onClick={handleOptimize}>Запустить оптимизацию</Button>
         </CardContent>
       </Card>
     </div>

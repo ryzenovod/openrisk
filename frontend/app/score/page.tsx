@@ -33,30 +33,33 @@ export default function ScorePage() {
     try {
       const data = await scoreApplication(form);
       setResult(data);
-      setMessage('Scoring completed');
+      setMessage('Скоринг завершён');
     } catch (error) {
-      setMessage('Failed to score. Check API.');
+      setMessage('Не удалось выполнить скоринг. Проверьте API.');
     }
   };
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">Score application</h2>
-        <p className="text-sm text-muted">Введите параметры заявки и получите PD/EL.</p>
+      <div className="alpha-gradient rounded-3xl border border-border p-6">
+        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">AI скоринг</p>
+        <h2 className="mt-3 text-3xl font-semibold">Оценка заявки</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Введите параметры клиента и получите PD/EL с объяснением факторов.
+        </p>
       </div>
       {message && <Toast message={message} />}
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Application form</CardTitle>
+            <CardTitle>Форма заявки</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-3">
             {Object.entries(form).map(([key, value]) => (
               <label key={key} className="grid gap-1 text-sm">
                 {key}
                 <input
-                  className="rounded-md border bg-background px-3 py-2"
+                  className="rounded-2xl border border-border bg-background px-4 py-2"
                   value={value}
                   type="number"
                   step="any"
@@ -64,12 +67,12 @@ export default function ScorePage() {
                 />
               </label>
             ))}
-            <Button onClick={handleSubmit}>Run scoring</Button>
+            <Button onClick={handleSubmit}>Запустить скоринг</Button>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Result</CardTitle>
+            <CardTitle>Результат</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {result ? (
@@ -78,18 +81,18 @@ export default function ScorePage() {
                   <Badge variant={result.recommendation === 'approve' ? 'success' : 'warning'}>
                     {result.recommendation}
                   </Badge>
-                  <span className="text-sm text-muted">Model decision</span>
+                  <span className="text-sm text-muted-foreground">Решение модели</span>
                 </div>
                 <div>
-                  <p className="text-sm text-muted">PD</p>
+                  <p className="text-sm text-muted-foreground">PD</p>
                   <p className="text-2xl font-semibold">{(result.pd * 100).toFixed(2)}%</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted">Expected loss</p>
+                  <p className="text-sm text-muted-foreground">Ожидаемые потери</p>
                   <p className="text-2xl font-semibold">${result.expected_loss.toFixed(0)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted">Top factors</p>
+                  <p className="text-sm text-muted-foreground">Топ факторы</p>
                   <div className="flex flex-wrap gap-2">
                     {result.top_factors.map((factor: string) => (
                       <Badge key={factor}>{factor}</Badge>
@@ -98,7 +101,7 @@ export default function ScorePage() {
                 </div>
               </>
             ) : (
-              <p className="text-sm text-muted">Запустите скоринг для рзультата.</p>
+              <p className="text-sm text-muted-foreground">Запустите скоринг для результата.</p>
             )}
           </CardContent>
         </Card>

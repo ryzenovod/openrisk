@@ -24,13 +24,14 @@ export default function JobDetailPage({ params }: { params: { jobId: string } })
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="alpha-gradient rounded-3xl border border-border p-6 flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-semibold">Job #{params.jobId}</h2>
-          <p className="text-sm text-muted">Realtime log streaming via SSE.</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Realtime</p>
+          <h2 className="mt-2 text-3xl font-semibold">Задача #{params.jobId}</h2>
+          <p className="mt-2 text-sm text-muted-foreground">Лог стримится через SSE.</p>
         </div>
         <Button variant="outline" onClick={() => window.location.reload()}>
-          Refresh
+          Обновить
         </Button>
       </div>
       <Card>
@@ -39,13 +40,13 @@ export default function JobDetailPage({ params }: { params: { jobId: string } })
         </CardHeader>
         <CardContent>
           {job ? (
-            <div className="text-sm">
-              <p>Type: {job.job_type}</p>
-              <p>Status: {job.status}</p>
-              <p>Progress: {Math.round(job.progress * 100)}%</p>
+            <div className="text-sm space-y-1">
+              <p>Тип: {job.job_type}</p>
+              <p>Статус: {job.status}</p>
+              <p>Прогресс: {Math.round(job.progress * 100)}%</p>
             </div>
           ) : (
-            <p className="text-sm text-muted">Loading...</p>
+            <p className="text-sm text-muted-foreground">Загрузка...</p>
           )}
         </CardContent>
       </Card>
@@ -57,12 +58,12 @@ export default function JobDetailPage({ params }: { params: { jobId: string } })
           <div className="space-y-2 text-sm">
             {events.length ? (
               events.map((event) => (
-                <div key={event.id} className="rounded-md border bg-muted/40 px-3 py-2">
+                <div key={event.id} className="rounded-2xl border border-border bg-muted/50 px-4 py-3">
                   <span className="font-semibold">[{event.level}]</span> {event.message}
                 </div>
               ))
             ) : (
-              <p className="text-muted">Waiting for events...</p>
+              <p className="text-muted-foreground">Ожидаем события...</p>
             )}
           </div>
         </CardContent>

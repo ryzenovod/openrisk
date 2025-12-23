@@ -19,22 +19,23 @@ export default function JobsPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">Jobs</h2>
-        <p className="text-sm text-muted">История задач оптимизации и retrain.</p>
+      <div className="alpha-gradient rounded-3xl border border-border p-6">
+        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Операции</p>
+        <h2 className="mt-3 text-3xl font-semibold">Очередь задач</h2>
+        <p className="mt-2 text-sm text-muted-foreground">История оптимизации и retrain.</p>
       </div>
       <Card>
-        <CardHeader>
-          <CardTitle>Recent jobs</CardTitle>
-        </CardHeader>
+          <CardHeader>
+            <CardTitle>Последние job</CardTitle>
+          </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>ID</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Progress</TableHead>
+                <TableHead>Тип</TableHead>
+                <TableHead>Статус</TableHead>
+                <TableHead>Прогресс</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -54,8 +55,8 @@ export default function JobsPage() {
               ))}
               {!jobs.length && (
                 <TableRow>
-                  <TableCell colSpan={4} className="text-muted">
-                    No jobs yet. Run optimize or retrain.
+                  <TableCell colSpan={4} className="text-muted-foreground">
+                    Пока нет задач. Запустите оптимизацию или retrain.
                   </TableCell>
                 </TableRow>
               )}
