@@ -8,6 +8,10 @@
 docker compose up --build
 ```
 
+Если после сборки backend падает с ошибкой `ImportError: no pq wrapper available`, убедитесь что используется `psycopg[binary]` (уже добавлено в `backend/requirements.txt`) и пересоберите контейнер.
+
+Если frontend сообщает: `"next start" does not work with "output: standalone"`, запуск уже исправлен — контейнер стартует через `node .next/standalone/server.js`.
+
 ### Переменные окружения
 
 | Переменная | Описание | Значение по умолчанию |
@@ -31,6 +35,22 @@ docker compose up --build
 - Backend: `http://localhost:8000`
 - Docs: `http://localhost:8000/docs`
 - OpenAPI: `http://localhost:8000/openapi.json`
+
+## Что делать дальше
+
+1. Соберите и запустите все сервисы:
+   ```bash
+   docker compose up --build
+   ```
+2. Откройте UI:
+   - `http://localhost:3000`
+3. Проверьте backend:
+   - `http://localhost:8000/health`
+   - `http://localhost:8000/docs`
+4. Запустите оптимизацию портфеля:
+   - UI → **Portfolio optimize** → **Run optimization job**
+5. Откройте live-лог job:
+   - UI → **Jobs** → выберите job → наблюдайте SSE лог.
 
 ### Пример запроса
 
