@@ -12,6 +12,12 @@
   --muted-foreground: 225 12% 40%;
   --border: 220 20% 92%;
   --accent: 0 85% 96%;
+  --hero-from: 0 85% 96%;
+  --hero-to: 0 0% 100%;
+  --chart-primary: 217 91% 60%;
+  --chart-primary-fill: 214 96% 82%;
+  --chart-success: 142 72% 45%;
+  --chart-success-fill: 142 72% 70%;
 }
 
 .dark {
@@ -24,6 +30,12 @@
   --muted-foreground: 220 12% 70%;
   --border: 225 18% 26%;
   --accent: 0 32% 24%;
+  --hero-from: 224 28% 20%;
+  --hero-to: 220 18% 10%;
+  --chart-primary: 213 94% 70%;
+  --chart-primary-fill: 214 62% 30%;
+  --chart-success: 142 70% 55%;
+  --chart-success-fill: 142 62% 30%;
 }
 
 body {
@@ -32,5 +44,5 @@ body {
 }
 
 .alpha-gradient {
-  background: linear-gradient(135deg, #ffebeb 0%, #ffffff 60%);
+  background: linear-gradient(135deg, hsl(var(--hero-from)) 0%, hsl(var(--hero-to)) 60%);
 }

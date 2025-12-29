@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Activity, ClipboardCheck, Database, LayoutDashboard, Settings } from 'lucide-react';
+import { Activity, ClipboardCheck, Database, LayoutDashboard, Settings, X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -15,7 +15,7 @@ const navItems = [
   { href: '/jobs', label: 'Задачи', icon: Activity }
 ];
 
-export function Sidebar() {
+export function Sidebar({ isOpen, onClose }: { isOpen?: boolean; onClose?: () => void }) {
   const pathname = usePathname();
   const [apiKey, setApiKey] = useState('');
 
@@ -36,13 +36,27 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="flex w-72 flex-col border-r border-border bg-card p-6">
+    <aside
+      className={cn(
+        'fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full flex-col border-r border-border bg-card p-6 transition-transform md:static md:translate-x-0 md:overflow-visible overflow-y-auto',
+        isOpen && 'translate-x-0'
+      )}
+    >
       <div className="flex items-center justify-between">
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Кредитный риск</p>
           <h1 className="text-xl font-semibold">Платформа решений</h1>
         </div>
-        <ThemeToggle />
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            className="rounded-full border border-border p-2 text-muted-foreground transition hover:text-foreground md:hidden"
+            aria-label="Закрыть меню"
+            onClick={() => onClose?.()}
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
       </div>
       <nav className="mt-10 flex flex-1 flex-col gap-2">
         {navItems.map((item) => {

@@ -7,13 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { fetchDashboard } from '@/lib/api-client';
-
-const fallbackMetrics = {
-  total_applications: 0,
-  approved_rate: 0,
-  average_pd: 0,
-  portfolio_el: 0
-};
+import { generateDashboardSimulation } from '@/lib/dashboard-simulator';
 
 export default function DashboardPage() {
   const [data, setData] = useState<any>(null);
@@ -22,13 +16,7 @@ export default function DashboardPage() {
     fetchDashboard()
       .then(setData)
       .catch(() => {
-        setData({
-          metrics: fallbackMetrics,
-          recent_jobs: [],
-          pd_distribution: [0.1, 0.2, 0.15, 0.3],
-          el_over_time: [1200, 900, 1400, 1100],
-          job_durations: [0.4, 0.7, 0.9]
-        });
+        setData(generateDashboardSimulation());
       });
   }, []);
 
@@ -94,8 +82,17 @@ export default function DashboardPage() {
               <AreaChart data={data.pd_distribution.map((value: number, index: number) => ({ index, value }))}>
                 <XAxis dataKey="index" hide />
                 <YAxis hide />
-                <Tooltip />
-                <Area dataKey="value" stroke="#2563eb" fill="#93c5fd" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: 'hsl(var(--card))',
+                    borderColor: 'hsl(var(--border))',
+                    borderRadius: '12px'
+                  }}
+                  labelStyle={{ color: 'hsl(var(--muted-foreground))' }}
+                  itemStyle={{ color: 'hsl(var(--foreground))' }}
+                  cursor={{ stroke: 'hsl(var(--border))' }}
+                />
+                <Area dataKey="value" stroke="hsl(var(--chart-primary))" fill="hsl(var(--chart-primary-fill))" />
               </AreaChart>
             </ResponsiveContainer>
           </CardContent>
@@ -110,8 +107,17 @@ export default function DashboardPage() {
               <BarChart data={data.el_over_time.map((value: number, index: number) => ({ index, value }))}>
                 <XAxis dataKey="index" hide />
                 <YAxis hide />
-                <Tooltip />
-                <Bar dataKey="value" fill="#22c55e" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: 'hsl(var(--card))',
+                    borderColor: 'hsl(var(--border))',
+                    borderRadius: '12px'
+                  }}
+                  labelStyle={{ color: 'hsl(var(--muted-foreground))' }}
+                  itemStyle={{ color: 'hsl(var(--foreground))' }}
+                  cursor={{ fill: 'hsl(var(--muted))' }}
+                />
+                <Bar dataKey="value" fill="hsl(var(--chart-success))" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>

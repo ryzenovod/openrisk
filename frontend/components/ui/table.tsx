@@ -13,14 +13,18 @@ Table.displayName = 'Table';
 
 const TableHeader = React.forwardRef<HTMLTableSectionElement, React.HTMLAttributes<HTMLTableSectionElement>>(
   ({ className, ...props }, ref) => (
-    <thead ref={ref} className={cn('border-b text-left text-[11px] uppercase text-muted-foreground', className)} {...props} />
+    <thead
+      ref={ref}
+      className={cn('border-b border-border text-left text-[11px] uppercase text-muted-foreground', className)}
+      {...props}
+    />
   )
 );
 TableHeader.displayName = 'TableHeader';
 
 const TableBody = React.forwardRef<HTMLTableSectionElement, React.HTMLAttributes<HTMLTableSectionElement>>(
   ({ className, ...props }, ref) => (
-    <tbody ref={ref} className={cn('divide-y', className)} {...props} />
+    <tbody ref={ref} className={cn('divide-y divide-border', className)} {...props} />
   )
 );
 TableBody.displayName = 'TableBody';
